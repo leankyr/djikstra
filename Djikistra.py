@@ -3,23 +3,34 @@
 
 
 def main():
-    adj_mat = [[0, 6, 0, 1, 0], [6, 0, 5, 2, 2], [0, 5, 0, 0, 5], [1, 2, 0, 0, 2], [0, 2, 5, 2, 0]]
-    for i in range(0,len(adj_mat)):
-        for j in range(0, len(adj_mat[0])):
-            print (adj_mat[i][j], end=" ")
+    matrix = [[0, 6, 10, 1, 10], [6, 0, 5, 2, 2], [10, 5, 0, 10, 5], [1, 2, 10, 0, 2], [10, 2, 5, 2, 0]]
+    k = 0 # source vertex
+    m = 5 # num of elements in row
+    n = 5 # num of elements in col
+    cost = [[0 for x in range(m)] for x in range(1)]
+    print (cost)
+    offsets = []
+    offsets.append(k)
+    elepos=0
+    print(offsets)
+    for j in range(m):
+        cost[0][j] = matrix[k][j]
+    mini = 999
+    for x in range(m - 1):
+        mini = 999
+        for j in range(m):
+            if cost[0][j] <= mini and j not in offsets:
+                mini = cost[0][j]
+                elepos = j
+        offsets.append(elepos)
+        for j in range(m):
+            if cost[0][j] > cost[0][elepos] + matrix[elepos][j]:
+                cost[0][j] = cost[0][elepos] + matrix[elepos][j]
+    print("The shortest path", offsets)
+    print("The cost to various vertices in order", cost)
 
-        print(" ")
 
-        V = []
-        U = [0, 1, 2, 3, 4]
-        SD = [0, 100, 100, 100, 100]
-        PV = [0 ,0, 0 ,0 ,0]
-    for i in range(0, len(adj_mat[0])):
-        
-
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     # execute only if run as a script
     main()
 
